@@ -75,6 +75,15 @@ describe('ShowComponent', function () {
     }])
   });
 
+  it('it should be able to generate error in case of error for ngOnInit', () => {
+    spyOn(console, 'error');
+    spyOn(service, 'getData').and.returnValue(
+      Observable.throw(Error('Observable Error Occurs'))
+    );
+    comp.ngOnInit();
+    expect(console.error).toHaveBeenCalledWith(Error('Observable Error Occurs'));
+  });
+
   it('it should be able to delete data from service',() =>{
     spyOn(window, "alert");
     spyOn(service,'remove').and.returnValue(
@@ -94,6 +103,15 @@ describe('ShowComponent', function () {
       expect(data).toBe(true);
     })
 
+  });
+
+  it('it should be able to generate error in case of error for deleting task', () => {
+    spyOn(console, 'error');
+    spyOn(service, 'remove').and.returnValue(
+      Observable.throw(Error('Observable Error Occurs'))
+    );
+    comp.deleteByIndex(0);
+    expect(console.error).toHaveBeenCalled();
   });
 
   it('it should be able to edit data from service',() =>{

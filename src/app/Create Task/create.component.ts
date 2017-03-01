@@ -30,14 +30,20 @@ export class CreateComponent {
 
   submit() {
     if (this.index || this.index === 0) {
-      this.service.updateTask(this.task).subscribe()//(data: any) => alert(JSON.stringify(data)))
+      this.service.updateTask(this.task).subscribe((data: any) => {
+        alert("Task is created");
+      }, err => {
+        console.error(err);
+      })
     } else {
-      this.service.addTask(this.task).subscribe()//(data: any) => alert(JSON.stringify(data)))
+      this.service.addTask(this.task).subscribe((data: any) => {
+        alert("Task Added");
+      }, err => {
+        console.error(err);
+      })
+
     }
-
-    alert("Task is created");
   }
-
   public ngOnInit() {
     this.route.params.subscribe((data: any) => {
       this.index = +data.indexSent;
@@ -47,9 +53,7 @@ export class CreateComponent {
             this.task = data[this.index]
 
           },
-          (err: any) => alert(err), () => {
-            alert('Success')
-          });
+          (err: any) => console.error(err));
       }
     });
   }

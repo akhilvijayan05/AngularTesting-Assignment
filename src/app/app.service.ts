@@ -45,7 +45,6 @@ export class AppService{
   }
 
   getData(): Observable<any> {
-    alert("here");
     let jsonHeader = new Headers({
       'Content-Type': 'application/json'
     });
@@ -57,7 +56,7 @@ export class AppService{
   updateTask(task: Task): Observable<any> {
     let jsonHeader = new Headers({
       'Content-Type': 'application/json'
-    });
+    } );
     let obj = {
       date: task.date,
       title: task.title,

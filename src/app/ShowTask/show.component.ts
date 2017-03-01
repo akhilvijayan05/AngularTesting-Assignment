@@ -27,15 +27,18 @@ http:Http;
         this.tasks = data
         alert(JSON.stringify(data))
       },
-      (err: any) => alert(err), () => {
-        alert('Success')
-      });
+      (err: any) => console.error(err));
   }
   deleteByIndex(index: number) {
 
-    this.service.remove(this.tasks[index]._id).subscribe()//(data: any) => alert(JSON.stringify(data)))
-    alert('Task Removed')
-    this.router.navigate(['create'])
+    this.service.remove(this.tasks[index]._id).subscribe((data: any) => {
+        alert(JSON.stringify(data))
+        alert('Task Removed')
+        this.router.navigate(['create'])
+      },
+      err => {
+        console.error(err);
+      })
   }
 
 
